@@ -20,7 +20,7 @@ jobs:
       # - name: Check if EKS cluster exists
       #   id: check-eks
       #   run: |
-      #     if aws eks describe-cluster --name my-eks-cluster --region us-east-1; then
+      #     if aws eks describe-cluster --name demo-cluster --region us-east-1; then
       #       echo "exists=true" >> $GITHUB_OUTPUT
       #     else
       #       echo "exists=false" >> $GITHUB_OUTPUT
@@ -43,7 +43,7 @@ jobs:
       #   run: eksctl create cluster --name demo-cluster --region us-east-1 
       - name: Update kubeconfig
         run: |
-           aws eks update-kubeconfig --name my-eks-cluster --region us-east-1
+           aws eks update-kubeconfig --name demo-cluster --region us-east-1
       - name: list cluster
         run: aws eks list-clusters
 
