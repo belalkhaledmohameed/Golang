@@ -45,12 +45,12 @@ jobs:
         run: aws eks list-clusters
 
       - name: run Deployment
-        run: kubectl apply -f ./k8s/manifests/deployment.yml
+        run: kubectl apply -f ../../k8s/manifests/deployment.yml
 
       - name: run service 
-        run : kubectl apply -f ./k8s/manifests/service.yml
+        run : kubectl apply -f ../../k8s/manifests/service.yml
       - name: run ingress
-        run: kubectl apply -f ./k8s/manifests/ingress.yml
+        run: kubectl apply -f ../../k8s/manifests/ingress.yml
       - name: Run EKS Cluster
         run:  |
           kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml
