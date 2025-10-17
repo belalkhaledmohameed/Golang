@@ -41,7 +41,8 @@ jobs:
 
       # - name: Create kubeconfig
       #   run: eksctl create cluster --name demo-cluster --region us-east-1 
-      
+      - name: list cluster
+        run: aws eks list-clusters
       
       - name: run Deployment
         run: kubectl apply -f ./k8s/manifests/deployment.yml
