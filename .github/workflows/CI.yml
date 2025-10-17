@@ -77,13 +77,12 @@ jobs:
       with:
         token: ${{ secrets.TOKEN }}
 
-    - name: Update tag 
       
 
     - name: Commit and push changes
       run: |
         git config --global user.email "www.bk3344@gmail.com"
         git config --global user.name "Belal Khaled"
-        git add k8s/manifests
+        git add k8s/manifests/.
         git commit -m "Update tag"
         git push
