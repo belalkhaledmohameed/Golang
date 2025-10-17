@@ -62,3 +62,4 @@ jobs:
         run: |
           kubectl get nodes -o wide
           kubectl get ing
+          nslookup ad9022f93e3e2472d82bc43cf56464a0-a3f0d656accd695e.elb.us-east-1.amazonaws.com
