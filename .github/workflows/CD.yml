@@ -12,9 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Run EKS Cluster
-        run: |
-        cd ../../../../Downloads/
-        kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml
+        run:  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml
+
+
       
       - name: run Deployment
         run: kubectl apply -f deployment.yml
