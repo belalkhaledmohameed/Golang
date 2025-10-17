@@ -17,30 +17,30 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Check if EKS cluster exists
-        id: check-eks
-        run: |
-          if aws eks describe-cluster --name my-eks-cluster --region us-east-1; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
+      # - name: Check if EKS cluster exists
+      #   id: check-eks
+      #   run: |
+      #     if aws eks describe-cluster --name my-eks-cluster --region us-east-1; then
+      #       echo "exists=true" >> $GITHUB_OUTPUT
+      #     else
+      #       echo "exists=false" >> $GITHUB_OUTPUT
+      #     fi
 
-      - name: Deploy to EKS
-        if: steps.check-eks.outputs.exists == 'true'
-        run: |
-          aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
+      # - name: Deploy to EKS
+      #   if: steps.check-eks.outputs.exists == 'true'
+      #   run: |
+      #     aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
       
-      - name: install EKS
-        run: |
-          curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-          sudo mv /tmp/eksctl /usr/local/bin/
-          eksctl version
-          kubectl get nodes -o wide
+      # - name: install EKS
+      #   run: |
+      #     curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+      #     sudo mv /tmp/eksctl /usr/local/bin/
+      #     eksctl version
+      #     kubectl get nodes -o wide
       
 
-      - name: Create kubeconfig
-        run: eksctl create cluster --name demo-cluster --region us-east-1 
+      # - name: Create kubeconfig
+      #   run: eksctl create cluster --name demo-cluster --region us-east-1 
       
       
       - name: run Deployment
