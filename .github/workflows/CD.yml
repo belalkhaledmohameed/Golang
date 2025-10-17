@@ -41,6 +41,9 @@ jobs:
 
       # - name: Create kubeconfig
       #   run: eksctl create cluster --name demo-cluster --region us-east-1 
+      - name: Update kubeconfig
+        run: |
+           aws eks update-kubeconfig --name my-eks-cluster --region us-east-1
       - name: list cluster
         run: aws eks list-clusters
 
