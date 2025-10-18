@@ -17,16 +17,17 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: delete EKS Cluster 
-        run: eksctl delete cluster --name demo-cluster --region us-east-1
-      - name: delete ing controller
-        run: kubectl delete ing go-web-app
-      # - name: Check if EKS cluster exists
-      #   id: check-eks
-      #   run: |
-      #     if aws eks describe-cluster --name demo-cluster --region us-east-1; then
-      #       echo "exists=true" >> $GITHUB_OUTPUT
-      #       aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+      
+      - name: Check if EKS cluster exists
+        id: check-eks
+        run: |
+          if aws eks describe-cluster --name demo-cluster --region us-east-1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            
+            eksctl delete cluster --name demo-cluster --region us-east-1
+      # - name: delete ing controller
+      #   run: kubectl delete ing go-web-app
+            # aws eks update-kubeconfig --region us-east-1 --name demo-cluster
       
 
       #     else
