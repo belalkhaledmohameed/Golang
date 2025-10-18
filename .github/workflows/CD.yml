@@ -29,13 +29,13 @@ jobs:
       
          
 
-      #     else
-      #       echo "exists=false" >> $GITHUB_OUTPUT
-      #       url --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-      #       sudo mv /tmp/eksctl /usr/local/bin/
-      #       eksctl version
-      #       kubectl get nodes -o wide
-      #     fi
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            url --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            sudo mv /tmp/eksctl /usr/local/bin/
+            eksctl version
+            kubectl get nodes -o wide
+          fi
       - name: delete eks
         run: eksctl delete cluster --name demo-cluster --region us-east-1
 
