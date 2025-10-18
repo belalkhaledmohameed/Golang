@@ -34,7 +34,7 @@ jobs:
           else
             echo "exists=false" >> $GITHUB_OUTPUT
             
-            kubectl get nodes -o wide
+          
           fi
       - name: delete eks
         run: eksctl delete cluster --name demo-cluster --region us-east-1
