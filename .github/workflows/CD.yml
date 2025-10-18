@@ -23,20 +23,21 @@ jobs:
         run: |
           if aws eks describe-cluster --name demo-cluster --region us-east-1; then
             echo "exists=true" >> $GITHUB_OUTPUT
-            eksctl version
-     
-      # - name: delete ing controller
-      #   run: kubectl delete ing go-web-app
-            # aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+            aws eks update-kubeconfig --region us-east-1 --name demo-cluster
       
+            
+      
+         
 
       #     else
       #       echo "exists=false" >> $GITHUB_OUTPUT
       #       url --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
       #       sudo mv /tmp/eksctl /usr/local/bin/
-      #       
+      #       eksctl version
       #       kubectl get nodes -o wide
       #     fi
+      - name: delete eks
+        run: eksctl delete cluster --name demo-cluster --region us-east-1
 
       # # - name: Deploy to EKS
       # #   if: steps.check-eks.outputs.exists == 'true'
@@ -48,7 +49,7 @@ jobs:
       # #     curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
       # #     sudo mv /tmp/eksctl /usr/local/bin/
       # #     eksctl version
-      # #     kubectl get nodes -o wide
+      # #     
       
 
       # # - name: Create kubeconfig
@@ -77,3 +78,5 @@ jobs:
       #     nslookup ad9022f93e3e2472d82bc43cf56464a0-a3f0d656accd695e.elb.us-east-1.amazonaws.com
       #     kubectl get svc
       #     kubectl get pods
+      - name: delete ing controller
+        run: kubectl delete ing go-web-app
