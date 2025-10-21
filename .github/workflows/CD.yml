@@ -74,7 +74,7 @@ jobs:
       - name: Get Load Balancer DNS name
         id: get_dns
         run: |
-          ELB_DNS=$(aws elb describe-load-balancers --query "LoadBalancerDescriptions[0].DNSName" --output text)
+          ELB_DNS=$(kubectl get svc my-service -n default -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
           echo "ELB_DNS=$ELB_DNS" >> $GITHUB_ENV
           echo "DNS Address: $ELB_DNS"
       - name: list nodes-ips and ingress-ips
