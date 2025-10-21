@@ -71,11 +71,17 @@ jobs:
         run:  |
           kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.1/deploy/static/provider/aws/deploy.yaml
           kubectl get ing
+      - name: Get Load Balancer DNS name
+        id: get_dns
+        run: |
+          ELB_DNS=$(aws elb describe-load-balancers --query "LoadBalancerDescriptions[0].DNSName" --output text)
+          echo "ELB_DNS=$ELB_DNS" >> $GITHUB_ENV
+          echo "DNS Address: $ELB_DNS"
       - name: list nodes-ips and ingress-ips
         run: |
           kubectl get nodes -o wide
           kubectl get ing
-          nslookup a13395f9dbfe6403abf4cdc97ebc82cd-a7c6bfe03809be9d.elb.us-east-1.amazonaws.com
+          nslookup $ELB_DNS
           kubectl get svc
           kubectl get pods
       # - name: delete ing controller
