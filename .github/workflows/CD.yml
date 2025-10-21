@@ -29,7 +29,6 @@ jobs:
           if aws eks describe-cluster --name demo-cluster --region us-east-1; then
             echo "exists=true" >> $GITHUB_OUTPUT
             aws eks update-kubeconfig --region us-east-1 --name demo-cluster
-      
 
           else
             echo "exists=false" >> $GITHUB_OUTPUT
