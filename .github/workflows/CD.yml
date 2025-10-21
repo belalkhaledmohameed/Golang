@@ -29,10 +29,6 @@ jobs:
           if aws eks describe-cluster --name demo-cluster --region us-east-1; then
             echo "exists=true" >> $GITHUB_OUTPUT
             aws eks update-kubeconfig --region us-east-1 --name demo-cluster
-      
-            
-      
-         
 
           else
             echo "exists=false" >> $GITHUB_OUTPUT
@@ -79,7 +75,7 @@ jobs:
         run: |
           kubectl get nodes -o wide
           kubectl get ing
-          nslookup a8770055a50f6483f836fdd659fd6980-fe0d100353b9ba79.elb.us-east-1.amazonaws.com
+          nslookup a13395f9dbfe6403abf4cdc97ebc82cd-a7c6bfe03809be9d.elb.us-east-1.amazonaws.com
           kubectl get svc
           kubectl get pods
       # - name: delete ing controller
