@@ -30,9 +30,6 @@ jobs:
             echo "exists=true" >> $GITHUB_OUTPUT
             aws eks update-kubeconfig --region us-east-1 --name demo-cluster
       
-            
-      
-         
 
           else
             echo "exists=false" >> $GITHUB_OUTPUT
