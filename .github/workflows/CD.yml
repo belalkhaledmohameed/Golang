@@ -26,12 +26,18 @@ jobs:
       - name: Check if EKS cluster exists
         id: check-eks
         run: |
-          if aws eks describe-cluster --name demo-cluster --region us-east-1; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-            aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+          if aws cloudformation describe-stacks --stack-name eksctl-demo-cluster-cluster; then
+            echo " Stack exists."
+            aws cloudformation delete-stack --stack-name eksctl-demo-cluster-cluster
 
+            if aws eks describe-cluster --name demo-cluster --region us-east-1; then
+               echo "exists=true" >> $GITHUB_OUTPUT
+               aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+
+            else
+               echo "exists=false" >> $GITHUB_OUTPUT
+               eksctl create cluster --name demo-cluster --region us-east-1 
           else
-            echo "exists=false" >> $GITHUB_OUTPUT
             eksctl create cluster --name demo-cluster --region us-east-1 
             
           
