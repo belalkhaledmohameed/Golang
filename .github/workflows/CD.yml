@@ -29,6 +29,9 @@ jobs:
           if aws cloudformation describe-stacks --stack-name eksctl-demo-cluster-cluster; then
             echo " Stack exists."
             aws cloudformation delete-stack --stack-name eksctl-demo-cluster-cluster
+            echo "Waiting for stack to be deleted..."
+            aws cloudformation wait stack-delete-complete --stack-name eksctl-demo-cluster-cluster
+            echo "Stack deleted successfully."
 
             if aws eks describe-cluster --name demo-cluster --region us-east-1; then
                echo "exists=true" >> $GITHUB_OUTPUT
