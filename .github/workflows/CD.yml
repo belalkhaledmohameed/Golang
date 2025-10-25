@@ -37,6 +37,7 @@ jobs:
             else
                echo "exists=false" >> $GITHUB_OUTPUT
                eksctl create cluster --name demo-cluster --region us-east-1 
+            fi
           else
             eksctl create cluster --name demo-cluster --region us-east-1 
             
